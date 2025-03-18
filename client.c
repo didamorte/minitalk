@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:25:53 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/13 00:17:14 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:49:54 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	send_char(int pid, unsigned char c)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
-		usleep(100);
+		usleep(500);
 	}
 }
 
@@ -41,7 +41,6 @@ int	main(int ac, char **av)
 	int					i;
 	struct sigaction	sa;
 
-	i = 0;
 	if (ac != 3)
 		return (1);
 	pid = ft_atoi(av[1]);
@@ -49,18 +48,10 @@ int	main(int ac, char **av)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGUSR1, &sa, NULL);
-	while (av[2][i] != '\0')
-	{
+	i = -1;
+	while (av[2][++i] != '\0')
 		send_char(pid, av[2][i]);
-		i++;
-	}
 	send_char(pid, '\0');
-	i = 0;
-	while (i < 200 && !g_message_received)
-	{
-		usleep(10000);
-		i++;
-	}
 	if (g_message_received)
 		write(1, "Mensagem recebida!\n", 19);
 	else

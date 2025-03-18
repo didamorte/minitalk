@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:25:49 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/13 00:17:29 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:51:16 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	handle_signal(int sig, siginfo_t *info, void *context)
 	static pid_t	client_pid = 0;
 
 	(void)context;
-	if (client_pid == 0)
+	if (client_pid == 0 || client_pid != info->si_pid)
 		client_pid = info->si_pid;
 	char_byte = (char_byte << 1) | (sig == SIGUSR2);
 	bit_count++;
