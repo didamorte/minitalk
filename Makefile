@@ -23,10 +23,10 @@ all: libft ft_printf $(SERVER) $(CLIENT)
 
 # Executable Creation
 $(SERVER): $(SRCS_SERVER)
-	$(CC) $(CFLAGS) -o $(SERVER) $(SRCS_SERVER) $(LIBFT_A) $(PRINTF_A)
+	$(CC) $(FLAGS) -o $(SERVER) $(SRCS_SERVER) $(LIBFT_A) $(PRINTF_A)
 
 $(CLIENT): $(SRCS_CLIENT)
-	$(CC) $(CFLAGS) -o $(CLIENT) $(SRCS_CLIENT) $(LIBFT_A)
+	$(CC) $(FLAGS) -o $(CLIENT) $(SRCS_CLIENT) $(LIBFT_A)
 
 # Library Compilation
 libft:
