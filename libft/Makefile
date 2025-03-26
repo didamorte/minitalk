@@ -31,6 +31,7 @@ SRCS	= ft_isalpha.c \
 		ft_atoi.c \
 		ft_atol.c \
 		ft_calloc.c \
+		ft_realloc.c \
 		ft_strdup.c \
 		ft_putchar_fd.c \
 		ft_putendl_fd.c \

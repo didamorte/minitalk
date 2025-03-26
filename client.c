@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:25:53 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/24 19:01:15 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:36:50 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	send_char(int pid, unsigned char c)
 	int	i;
 
 	i = 8;
+	g_message_received = 0;
 	while (i--)
 	{
 		if ((c >> i) & 1)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
-		usleep(100);
+		usleep(200);
 	}
 	while (!g_message_received)
 			pause();
-	g_message_received = 0;
 }
 
 int	main(int ac, char **av)
@@ -47,6 +47,8 @@ int	main(int ac, char **av)
 	if (ac != 3)
 		return (1);
 	pid = ft_atoi(av[1]);
+	if (kill(pid, 0) == -1)
+		return (1);
 	sa.sa_handler = confirmation_handler;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
@@ -55,9 +57,6 @@ int	main(int ac, char **av)
 	while (av[2][++i] != '\0')
 		send_char(pid, av[2][i]);
 	send_char(pid, '\0');
-	if (g_message_received)
-		write(1, "Mensagem recebida!\n", 19);
-	else
-		write(2, "Erro: Sem resposta do servidor.\n", 32);
+	ft_printf("Message sent to server PID %d!\n", pid);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:38:20 by diogribe          #+#    #+#             */
-/*   Updated: 2025/02/06 19:33:06 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:08:31 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ long	ft_atol(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 /*duplica uma string alocando memoria pra ela*/
 char	*ft_strdup(const char *s);
+/* realoca memoria */
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 /* PARTE 2 */
 
